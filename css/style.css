@@ -161,6 +161,10 @@ nav .fa {
     padding-top: 80px;
 }
 
+.course a {
+    margin: 50px 0 50px 0;
+}
+
 h1 {
     font-size: 36px;
     font-weight: 600;
@@ -214,6 +218,10 @@ p {
     margin: auto;
     text-align: center;
     padding-top: 50px;
+}
+
+.service a {
+    margin-top: 50px;
 }
 
 .service-column {
@@ -302,7 +310,7 @@ p {
     border-radius: 10px;
 }
 
-/*------ section testimonias ------*/
+/*------ section testimonials ------*/
 
 .testimonials {
     width: 80%;
@@ -420,6 +428,14 @@ p {
 
 .about-column p {
     padding: 15px 0 10px;
+    letter-spacing: 1px;
+}
+
+.about-column ul li {
+    margin-left: 20px;
+    color: #777777;
+    letter-spacing: 1px;
+    line-height: 1.8;
 }
 
 @media(max-width: 700px) {
@@ -543,4 +559,76 @@ p {
 
 .top-btn:active {
     opacity: 1;
+}
+
+
+/*------ services page ------*/
+
+.services {
+    max-width: 50%;
+    margin: auto;
+    padding: 20px 0;
+}
+
+.services .row {
+    flex-direction: column;
+}
+
+.services-column {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.services-column h1 {
+    padding-top:0;
+}
+
+.services-column p {
+    padding: 15px 0 10px;
+    letter-spacing: 1px;
+}
+
+.services-column ul li {
+    margin-left: 20px;
+    color: #777777;
+    letter-spacing: 1px;
+    line-height: 1.8;
+}
+
+.services-column a {
+    margin-top: 20px;
+}
+
+.services img {
+   width: 40%;
+}
+
+.services-column:hover {
+    box-shadow: 0 48px 100px 0 rgba(17,12,46,0.18);
+}
+
+
+/*------ prices page ------*/
+
+
+.prices {
+    width: 80%;
+    margin: auto;
+    padding: 20px 0;
+}
+
+.prices-column {
+    text-align: center;
+    margin: auto;
+}
+
+.price-line hr{
+    border: solid 1px #cccccc;
+    display: block;
+    margin: 17px 0 17px 0;
+}
+
+.prices-blocks {
+
 }
