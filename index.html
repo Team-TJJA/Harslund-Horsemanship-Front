@@ -2,9 +2,162 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harslund & Horsemanship</title>
+    <script defer src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-Hello <p>World!</p>
+<header class="header">
+    <nav>
+        <a href="index.html" class="logo">Horsemanship</a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-solid fa-xmark" style="color: #ffffff;" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="index.html">Start</a></li>
+                <li><a href="services.html">Ydelser</a></li>
+                <li><a href="prices.html">Priser</a></li>
+                <li><a href="practices.html">Teknikker</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+                <li><a href="about.html">Om mig</a></li>
+            </ul>
+        </div>
+        <i class="fa fa-solid fa-bars" style="color: #ffffff;" onclick="showMenu()"></i>
+    </nav>
+    <div class="text-box">
+        <h1>Because Your Horse Deserves The Best</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias nesciunt alias voluptatem hic sunt ducimus <br> fuga praesentium repellendus consequuntur cupiditate pariatur enim delectus similique.</p>
+        <a href="#" class="banner-btn">SEE MORE</a>
+    </div>
+</header>
+
+<!-- section course -->
+<section class="course">
+    <h1>Foredrag & Demo'er</h1>
+    <p>Jeg tilbyder foredrag og demoer inden for en bred vifte af emner.</p>
+
+    <div class="row">
+        <div class="course-column">
+            <h3>Anatomi & Fysiologi</h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur quas corrupti explicabo rerum fugit enim libero suscipit sunt culpa tempore totam dolor, dolorem officia. Tempora cum impedit repudiandae dicta doloribus quaerat natus velit amet minus porro.
+            </p>
+        </div>
+
+        <div class="course-column">
+            <h3>Horsemanship</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam perferendis possimus cumque hic ea ducimus eos. Cum nesciunt amet nobis aperiam incidunt, molestiae in voluptatum, repellendus vitae recusandae minima iste?</p>
+        </div>
+
+        <div class="course-column">
+            <h3>Stævneriding</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta repudiandae facere error eveniet, quos blanditiis, quo quaerat corporis aliquam, ullam laudantium officiis. Voluptates illo recusandae harum dolor, unde amet ea commodi. Magni molestiae itaque totam vitae, ratione ipsa voluptatum rerum.</p>
+        </div>
+    </div>
+
+    <a href="services.html" class="banner-btn blue-btn">Læs Mere</a>
+
+</section>
+
+<!-- section service -->
+<section class="service">
+    <h1>Ydelser</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+    <div class="row">
+        <div class="service-column">
+            <img src="img/location4.jpg" alt="">
+            <div class="layer">
+                <h3>Ryttertræning & Yoga</h3>
+            </div>
+        </div>
+
+        <div class="service-column">
+            <img src="img/location1.jpg" alt="">
+            <div class="layer">
+                <h3>Træning</h3>
+            </div>
+        </div>
+
+        <div class="service-column">
+            <img src="img/location2.jpg" alt="">
+            <div class="layer">
+                <h3>Afbalancering - Fysiurgisk Hesteterapi</h3>
+            </div>
+        </div>
+    </div>
+
+    <a href="services.html" class="banner-btn blue-btn">Læs Mere</a>
+
+</section>
+
+<!-- section facility -->
+<section class="facilities">
+    <h1>Vores Faciliteter</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+    <div class="row">
+        <div class="facilities-column">
+            <img src="img/facility1.jpg" alt="">
+            <h3>Facility One</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quia atque quaerat?</p>
+        </div>
+
+        <div class="facilities-column">
+            <img src="img/facility2.jpg" alt="">
+            <h3>Facility Two</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, est quas eos illum labore debitis rerum excepturi rem.</p>
+        </div>
+
+        <div class="facilities-column">
+            <img src="img/facility4.jpg" alt="">
+            <h3>Facility Three</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quia atque quaerat?</p>
+        </div>
+    </div>
+</section>
+
+<!-- section testimonials -->
+<section class="testimonials">
+    <h1>What Customers Says</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+    <div class="row">
+        <div class="testimonials-column">
+            <div>
+                <p>" Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident aspernatur praesentium atque illo hic placeat similique obcaecati culpa. Quia nesciunt nulla nisi consequuntur voluptate.! "</p>
+                <h3>- Andreas H.</h3>
+            </div>
+        </div>
+
+        <div class="testimonials-column">
+            <div>
+                <p>" Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident aspernatur praesentium atque illo hic placeat similique obcaecati culpa. Quia nesciunt nulla nisi consequuntur voluptate.! "</p>
+                <h3>- Jesper W.</h3>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- section cta -->
+<section class="cta">
+    <h1>Enroll For My Various Courses, Horse Treatments Or Horse Stable Facilities.</h1>
+    <a href="contact.html" class="banner-btn">CONTACT ME</a>
+</section>
+
+<!-- section footer -->
+<section class="footer">
+
+    <div class="icons">
+        <a href="https://www.facebook.com/?locale=da_DK"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="https://youtube.com/"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+    <p> &copy; copyright - Harslunds Horsemanship & Bodywork - Pernille Harslund - 2023</p>
+</section>
+
+<a href="#"class="top-btn"><i class="fa-solid fa-arrow-right fa-rotate-270"></i></a>
 </body>
 </html>
