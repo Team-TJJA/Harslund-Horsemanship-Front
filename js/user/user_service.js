@@ -1,5 +1,5 @@
 import {createCards} from "../module.js";
 
-const serviceUrl = process.env.URL + "/ydelser";
+const serviceUrl = window._env_.URL + "/ydelser";
 
 document.addEventListener('DOMContentLoaded', () => { createCards(serviceUrl); } );
