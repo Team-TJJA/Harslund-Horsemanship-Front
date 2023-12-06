@@ -279,6 +279,8 @@ p {
     }
 }
 
+
+
 /*------ section facility ------*/
 
 .facilities {
@@ -436,6 +438,18 @@ p {
     color: #777777;
     letter-spacing: 1px;
     line-height: 1.8;
+}
+
+#admin-about-me {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px;
+}
+
+#about-me-editor {
+    width: 1100px;
+    height: 500px;
 }
 
 @media (max-width: 700px) {
@@ -624,11 +638,19 @@ p {
     font-size: x-large;
     font-weight: bolder ;
 }
-.admin-text {
+
+.admin-editor {
+    height: 500px;
+}
+
+.admin-editor div, .admin-editor img {
+    height: 91%;
+}
+
+.service-editor {
     min-width: 300px;
     max-width: 100%;
     min-height: 150px;
-    max-height: 80%;
     width: fit-content;
     resize: none;
 }
@@ -678,10 +700,10 @@ p {
 
 }
 
-#price-text {
+#price-editor {
+    align-self: center;
     min-width: 600px;
-    width: 1000px;
-    max-width: 80%;
+    width: 1200px;
     min-height: 500px;
     max-height: 1000px;
 }
