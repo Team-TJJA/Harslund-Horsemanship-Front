@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt</title>
     <script defer src="../../js/script.js"></script>
+    <script defer src="../../js/email_script.js"></script>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -63,12 +64,13 @@
         <div class="contact-column">
 
             <form action="">
-                <input type="email" placeholder="Email" required>
-                <input type="text" placeholder="Telefon" required>
-                <input type="text" placeholder="Emne" required>
-                <textarea rows="8" placeholder="Besked" required></textarea>
+                <input type="email" name="reply" placeholder="Email" required>
+                <input type="text" name="number" placeholder="Telefon" required>
+                <input type="text" name="subject" placeholder="Emne" required>
+                <textarea rows="8" name="message" placeholder="Besked" required></textarea>
                 <button type="submit" class="banner-btn blue-btn">Send Besked</button>
             </form>
+            <span class="display_message"></span>
 
         </div>
     </div>
