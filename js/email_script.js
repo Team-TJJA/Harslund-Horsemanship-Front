@@ -6,9 +6,7 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
-    console.log(data.get(''))
     const entries= Object.fromEntries(data.entries());
-    console.table(entries);
 
     insertDisplayContent('processing'); //visual representation of message being submitted.
 
@@ -39,7 +37,7 @@ function postMessageHandler(url, payload){
 
 function insertDisplayContent(cssClass) {
     if(cssClass === 'processing') {
-        display.classList.add('processing');
+        display.classList.add(cssClass);
         display.textContent = 'Sender besked...';
 
     } else if(cssClass ==='confirm') {
