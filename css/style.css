@@ -476,6 +476,40 @@ p {
     margin: auto;
 }
 
+.processing {
+    color: #000;
+    background: #fffdd0;
+    padding: 15px 30px;
+    margin: 20px 0;
+    display: inline-block;
+}
+
+.error {
+    color: #000;
+    background: #ffcccb;
+    padding: 15px 30px;
+    margin: 20px 0;
+    display: inline-block;
+}
+
+.confirm {
+    color: #000;
+    background: #DAF7A6;
+    padding: 15px 30px;
+    margin: 20px 0;
+    display: inline-block;
+}
+
+@keyframes fate_away {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 .contact-column {
     flex-basis: 48%;
     margin-bottom: 100px;
