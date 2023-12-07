@@ -1,5 +1,5 @@
 import {createCards} from "../module.js";
 
-const practiceUrl = process.env.URL + "/teknikker";
+const practiceUrl = "https://harslundbackend.azurewebsites.net/teknikker";
 
-document.addEventListener('DOMContentLoaded', () => { createCards(practiceUrl); } );
+document.addEventListener('DOMContentLoaded', () => { createCards(practiceUrl, "practices"); } );

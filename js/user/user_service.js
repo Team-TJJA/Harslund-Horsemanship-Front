@@ -1,5 +1,5 @@
 import {createCards} from "../module.js";
 
-const serviceUrl = window._env_.URL + "/ydelser";
+const serviceUrl = "https://harslundbackend.azurewebsites.net/ydelser";
 
-document.addEventListener('DOMContentLoaded', () => { createCards(serviceUrl); } );
+document.addEventListener('DOMContentLoaded', () => { createCards(serviceUrl, "services"); } );
