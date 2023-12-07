@@ -1,4 +1,4 @@
-import {setupPage} from "../module.js";
+import {setupPage} from "../modules/module.js";
 
 const aboutUrl = "https://harslundbackend.azurewebsites.net/om_mig";
 

@@ -1,4 +1,4 @@
-import {setupPage} from "../module.js";
+import {setupPage} from "../modules/module.js";
 
 const priceUrl = "https://harslundbackend.azurewebsites.net/priser";
 

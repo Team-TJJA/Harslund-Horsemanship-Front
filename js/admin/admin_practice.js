@@ -1,1 +1,1 @@
-import {} from "../module.js";
+import {createAdminCards} from "../modules/admin_card_module.js";

@@ -1,28 +1,30 @@
-import {} from "../module.js";
+import {createAdminCards} from "../modules/admin_card_module.js";
 
+//const serviceUrl = "https://harslundhorsemanship.azurewebsites.net/ydelser";
+const serviceUrl = "https://harslundbackend.azurewebsites.net/ydelser";
 const editors = document.querySelectorAll(".service-editor");
+document.addEventListener('DOMContentLoaded', () => { createAdminCards(serviceUrl, "service"); });
+document.addEventListener('DOMContentLoaded', () => { initiateEditors(); });
 
 function initiateEditors() {
     editors.forEach(editor => {
         const editor1 = new RichTextEditor(editor, {editorResizeMode: "none"});
+        const button = document.getElementById("test");
 
         //TODO put/post
-        const button_save = document.createElement("button");
-        button_save.textContent = "Save HTML";
-        button_save.addEventListener("click", function () {
+        button.addEventListener("click", function () {
             const editor = document.querySelector(editorSelector + ' iframe.rte-editable');
             // Get the inner content from the RichTextEditor's editable div-
             const innerContent = editor.contentDocument.body.innerHTML;
             console.log(innerContent)
         });
-        document.body.appendChild(button_save);
     });
 }
 
-initiateEditors();
+//test();
 
-import {createCards} from "../module.js";
-
-const serviceUrl = "https://harslundbackend.azurewebsites.net/ydelser";
-
-document.addEventListener('DOMContentLoaded', () => { createCards(serviceUrl, "service"); } );
+function test() {
+    const test = "vuhgipofdå <h1>dsfadsgshdtjyukyretrgsf</h1> skæjlhbvm nsdfjoipuyghv"
+    console.log(editors.item(0))
+    editors.item(0).contentDocument.body.innerHTML = test;
+}

@@ -1,22 +1,23 @@
-import {} from "../module.js";
+import {postOrPutObjectAsJson, saveAsString, setAdminData} from "../modules/module.js";
 
-
+const aboutUrl = "https://harslundbackend.azurewebsites.net/om_mig";
 const editor1 = new RichTextEditor("#about-me-editor", {editorResizeMode: "none"});
+//document.addEventListener('DOMContentLoaded',() => { setAdminData('price', aboutUrl, "#about-me-editor"); });
+document.addEventListener('DOMContentLoaded', createFormEventListener);
 
-function saveAsString(editorSelector) {
-
-    //TODO put/post
-    const button_save = document.createElement("button");
-    button_save.textContent = "Save HTML";
-    button_save.addEventListener("click", function () {
-        const editor = document.querySelector(editorSelector + ' iframe.rte-editable');
-
-
-        // Get the inner content from the RichTextEditor's editable div
-        const innerContent = editor.contentDocument.body.innerHTML;
-        console.log(innerContent)
-    });
-    document.body.appendChild(button_save);
+function createFormEventListener() {
+    const form = document.getElementById('admin-about-me');
+    form.addEventListener('submit', handleSubmitForm);
 }
 
-saveAsString("#about-me-editor");
+async function handleSubmitForm(event) {
+    event.preventDefault();
+    const form = saveAsString("#about-me-editor");
+    console.log(form)
+    let response;
+    response = await postOrPutObjectAsJson(aboutUrl, form, 'PUT');
+    if(response.ok) {
+        alert('SHOWING UPDATED');
+    }
+}
+

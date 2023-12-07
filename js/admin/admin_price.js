@@ -1,21 +1,21 @@
-import {} from "../module.js";
+import {postOrPutObjectAsJson, saveAsString, setAdminData} from "../modules/module.js";
 
+const priceUrl = "https://harslundbackend.azurewebsites.net/priser";
 const editor1 = new RichTextEditor("#price-editor", {editorResizeMode: "none"});
+document.addEventListener('DOMContentLoaded',() => { setAdminData('price', priceUrl, "#price-editor"); });
+document.addEventListener('DOMContentLoaded', createFormEventListener);
 
-function saveAsString(editorSelector) {
-
-    //TODO put/post
-    const button_save = document.createElement("button");
-    button_save.textContent = "Save HTML";
-    button_save.addEventListener("click", function () {
-        const editor = document.querySelector(editorSelector + ' iframe.rte-editable');
-
-
-        // Get the inner content from the RichTextEditor's editable div
-        const innerContent = editor.contentDocument.body.innerHTML;
-        console.log(innerContent)
-    });
-    document.body.appendChild(button_save);
+function createFormEventListener() {
+    const form = document.getElementById('admin-price');
+    form.addEventListener('submit', handleSubmitForm);
 }
 
-saveAsString("#price-editor");
+async function handleSubmitForm(event) {
+    event.preventDefault();
+    const form = saveAsString("#price-editor");
+    let response;
+    response = await postOrPutObjectAsJson(priceUrl, form, 'PUT');
+    if(response.ok) {
+        alert('SHOWING UPDATED');
+    }
+}
