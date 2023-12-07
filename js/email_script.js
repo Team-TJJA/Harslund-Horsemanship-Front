@@ -2,6 +2,8 @@ const form = document.querySelector('form');
 const display = document.querySelector('.display_message');
 const urlMime = 'https://harslundbackend.azurewebsites.net/send-mail';
 
+
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
