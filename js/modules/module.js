@@ -1,7 +1,6 @@
 async function fetchAnyData(url) {
     const response = await fetch(url);
     const jsonFormat = await response.json();
-    console.log(jsonFormat)
     return jsonFormat;
 }
 
@@ -44,10 +43,28 @@ function saveAsString(editorSelector) {
     return innerContent;
 }
 
-async function setAdminData(dataName, Url, editorSelector) {
+async function setAdminData(dataName, Url, editorSelector, elementID) {
     const data = await fetchAnyData(Url);
     const editor = document.querySelector(editorSelector + ' iframe.rte-editable');
-    editor.contentDocument.body.innerHTML = data[0].text;
+    editor.contentDocument.body.innerHTML = data[0].text
+    createFormEventListener(dataName, elementID, Url);
 }
 
-export {postOrPutObjectAsJson, restDelete, setupPage, saveAsString, setAdminData, fetchAnyData}
+function createFormEventListener(dataName, elementID, url) {
+    const form = document.getElementById(elementID);
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        handleSubmitForm(dataName, elementID, url);
+    });
+}
+
+async function handleSubmitForm(dataName, elementID, url) {
+    const form = {id: 1, text: saveAsString("#"+elementID)}
+    let response;
+    response = await postOrPutObjectAsJson(url, form, 'PUT');
+    if(response.ok) {
+        alert(dataName + ' updated');
+    }
+}
+
+export {postOrPutObjectAsJson, restDelete, setupPage, saveAsString, setAdminData, fetchAnyData, createFormEventListener}

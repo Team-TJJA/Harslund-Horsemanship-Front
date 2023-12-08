@@ -1,23 +1,10 @@
-import {postOrPutObjectAsJson, saveAsString, setAdminData} from "../modules/module.js";
+import {setAdminData, createFormEventListener} from "../modules/module.js";
 
-const aboutUrl = "https://harslundbackend.azurewebsites.net/om_mig";
-const editor1 = new RichTextEditor("#about-me-editor", {editorResizeMode: "none"});
-//document.addEventListener('DOMContentLoaded',() => { setAdminData('price', aboutUrl, "#about-me-editor"); });
-document.addEventListener('DOMContentLoaded', createFormEventListener);
+//const aboutUrl = "https://harslundhorsemanship.azurewebsites.net/om_mig";
+//const aboutUrl = "https://harslundbackend.azurewebsites.net/om_mig";
+const aboutUrl = "http://localhost:8080/om_mig";
 
-function createFormEventListener() {
-    const form = document.getElementById('admin-about-me');
-    form.addEventListener('submit', handleSubmitForm);
-}
+new RichTextEditor("#about-me-editor"   , {editorResizeMode: "none"});
+document.addEventListener('DOMContentLoaded',() => { setAdminData('about', aboutUrl, "#about-me-editor", "admin-about-me"); });
 
-async function handleSubmitForm(event) {
-    event.preventDefault();
-    const form = saveAsString("#about-me-editor");
-    console.log(form)
-    let response;
-    response = await postOrPutObjectAsJson(aboutUrl, form, 'PUT');
-    if(response.ok) {
-        alert('SHOWING UPDATED');
-    }
-}
 

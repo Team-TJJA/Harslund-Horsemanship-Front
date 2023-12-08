@@ -28,6 +28,7 @@ async function createAdminCards(Url, dataType) {
             createDeleteButton(dataContainer, Url);
         }
         dataCards.appendChild(dataContainer);
+        initiateEditor(dataType+"-editor"+element.priority, element.text);
     })
 }
 
@@ -66,8 +67,10 @@ async function deleteObjectById(objectId, Url) {
 function createCardInfo(container, element, dataType) {
     const div = document.createElement('div');
     const dataInfo = document.createElement('div');
-    dataInfo.classList.add(dataType+"-editor");
-    dataInfo.innerText = element.text;
+    const editorSelector = dataType+"-editor";
+    const editorSelector1 = editorSelector+element.priority;
+    dataInfo.classList.add(editorSelector);
+    dataInfo.setAttribute("id", editorSelector1);
     const br1 = document.createElement('br');
     const priority = document.createElement('input')
     priority.setAttribute('type', 'number');
@@ -89,6 +92,13 @@ function createCardImg(container, element) {
     imageDiv.appendChild(dataImage);
     imageDiv.appendChild(br2);
     imageDiv.appendChild(imageLink);
+}
+
+function initiateEditor(editorSelector, text) {
+    const editor = document.getElementById(editorSelector);
+    new RichTextEditor(editor, {editorResizeMode: "none"});
+    const editorElement = document.querySelector("#"+editorSelector + ' iframe.rte-editable');
+    editorElement.contentDocument.body.innerHTML = text;
 }
 
 export {createAdminCards}
