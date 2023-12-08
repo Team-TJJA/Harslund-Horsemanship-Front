@@ -233,9 +233,11 @@ p {
     height: 400px;
 }
 
-.service-column img {
+.service-column  img{
     width: 100%;
+    max-width: 300px;
     height: 100%;
+    padding-bottom: 100%;
     object-fit: cover;
 }
 
@@ -672,10 +674,11 @@ p {
     width: 80%;
     margin: auto;
     padding: 20px 0;
+    align-content: center;
 }
 
 .prices-column, .about-column {
-    text-align: center;
+    text-align-all: center;
     margin: auto;
 }
 
@@ -686,4 +689,15 @@ p {
     max-width: 100%;
     min-height: 500px;
     height: auto;
+}
+
+#price-row {
+    text-align: center;
+    margin: auto;
+}
+
+#about-row {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
 }

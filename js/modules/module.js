@@ -26,7 +26,7 @@ async function restDelete(url) {
 
 async function setupPage(dataName, Url) {
     const data = await fetchAnyData(Url);
-    const dataContainer = document.querySelector('.row');
+    const dataContainer = document.getElementById(dataName+'-row');
     while (dataContainer.firstChild) {
         dataContainer.removeChild(dataContainer.firstChild);
     }

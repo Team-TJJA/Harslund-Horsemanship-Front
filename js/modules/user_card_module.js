@@ -2,7 +2,6 @@ import {fetchAnyData} from "./module.js";
 
 async function createCards(Url, dataType) {
     const dataObjectList = await fetchAnyData(Url);
-    console.log(dataObjectList);
     const dataCards = document.querySelector('.row');
     while (dataCards.firstChild) {
         dataCards.removeChild(dataCards.firstChild);
@@ -10,6 +9,7 @@ async function createCards(Url, dataType) {
     dataObjectList.forEach(element => {
         const dataContainer = document.createElement('div');
         dataContainer.classList.add(dataType+"-column");
+        console.log("id: " +element.id)
         if (element.priority % 2 === 1) {
             //Create Info
             const dataInfo = document.createElement('div');
@@ -24,7 +24,11 @@ async function createCards(Url, dataType) {
             const imageDiv = document.createElement('div')
             const dataImage = document.createElement('img');
             dataImage.setAttribute('src', element.image);
-            dataImage.setAttribute('alt', 'No photo');
+            dataImage.setAttribute('alt', 'Intet billede');
+            dataImage.onerror = function() {
+                this.onerror = null; // Avoid potential infinite loops
+                this.src = '../../img/noImage.png'; // Set backup image source
+            };
             imageDiv.appendChild(dataImage);
             dataContainer.appendChild(dataInfo);
             dataContainer.appendChild(imageDiv);
@@ -33,7 +37,11 @@ async function createCards(Url, dataType) {
             const imageDiv = document.createElement('div')
             const dataImage = document.createElement('img');
             dataImage.setAttribute('src', element.image);
-            dataImage.setAttribute('alt', 'No photo');
+            dataImage.setAttribute('alt', 'Intet billede');
+            dataImage.onerror = function() {
+                this.onerror = null; // Avoid potential infinite loops
+                this.src = '../../img/noImage.png'; // Set backup image source
+            };
             dataContainer.appendChild(dataImage);
 
 
@@ -52,5 +60,4 @@ async function createCards(Url, dataType) {
         dataCards.appendChild(dataContainer);
     })
 }
-
 export {createCards}
