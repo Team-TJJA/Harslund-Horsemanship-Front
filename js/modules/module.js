@@ -67,4 +67,4 @@ async function handleSubmitForm(dataName, elementID, url) {
     }
 }
 
-export {postOrPutObjectAsJson, restDelete, setupPage, saveAsString, setAdminData, fetchAnyData, createFormEventListener}
+export {postOrPutObjectAsJson, restDelete, setupPage, saveAsString, setAdminData, fetchAnyData, handleSubmitForm}

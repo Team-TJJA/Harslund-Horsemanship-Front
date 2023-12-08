@@ -1,13 +1,13 @@
-import {fetchAnyData, restDelete} from "./module.js"
+import {fetchAnyData, restDelete, handleSubmitForm} from "./module.js"
 
-async function createAdminCards(Url, dataType) {
-    const dataObjectList = await fetchAnyData(Url);
+async function createAdminCards(url, dataType) {
+    const dataObjectList = await fetchAnyData(url);
     const dataCards = document.querySelector('.row');
     while (dataCards.firstChild) {
         dataCards.removeChild(dataCards.firstChild);
     }
     dataObjectList.forEach(element => {
-        const dataContainer = document.createElement('div');
+        const dataContainer = document.createElement('form');
         dataContainer.classList.add(dataType+"s-column");
         dataContainer.classList.add("admin-editor");
         if (element.priority % 2 === 1) {
@@ -17,7 +17,7 @@ async function createAdminCards(Url, dataType) {
             createCardImg(dataContainer, element)
             //create submit and delete buttons
             createSubmitButton(dataContainer);
-            createDeleteButton(dataContainer, Url);
+            createDeleteButton(dataContainer, url);
         } else {
             //Create img and append it
             createCardImg(dataContainer, element);
@@ -25,10 +25,15 @@ async function createAdminCards(Url, dataType) {
             createCardInfo(dataContainer, element, dataType);
             //create submit and delete buttons
             createSubmitButton(dataContainer);
-            createDeleteButton(dataContainer, Url);
+            createDeleteButton(dataContainer, url);
         }
         dataCards.appendChild(dataContainer);
-        initiateEditor(dataType+"-editor"+element.priority, element.text);
+        const editor = dataType+"-editor"+element.priority
+        initiateEditor(editor, element.text);
+        dataContainer.addEventListener('submit', (event) => {
+            event.preventDefault();
+            handleSubmitForm(dataType, editor, url);
+        });
     })
 }
 
@@ -42,11 +47,11 @@ function createSubmitButton(Container) {
     Container.appendChild(submitButton)
 }
 
-function createDeleteButton (container, dataObject, Url) {
+function createDeleteButton (container, dataObject, url) {
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', function() {
-        deleteObjectById(dataObject.id, Url);
+        deleteObjectById(dataObject.id, url);
         container.remove();
     });
     deleteButton.classList.add("blue-btn")
@@ -54,9 +59,9 @@ function createDeleteButton (container, dataObject, Url) {
     container.appendChild(deleteButton)
 }
 
-async function deleteObjectById(objectId, Url) {
+async function deleteObjectById(objectId, url) {
     try {
-        const response = await restDelete(Url + "/" + objectId)
+        const response = await restDelete(url + "/" + objectId)
         const data = await response.text();
         alert(data);
     } catch(error) {
