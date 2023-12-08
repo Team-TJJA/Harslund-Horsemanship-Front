@@ -1,22 +1,10 @@
-import {} from "../module.js";
+import {setAdminData, createFormEventListener} from "../modules/module.js";
+
+//const aboutUrl = "https://harslundhorsemanship.azurewebsites.net/om_mig";
+//const aboutUrl = "https://harslundbackend.azurewebsites.net/om_mig";
+const aboutUrl = "http://localhost:8080/om_mig";
+
+new RichTextEditor("#about-me-editor"   , {editorResizeMode: "none"});
+document.addEventListener('DOMContentLoaded',() => { setAdminData('about', aboutUrl, "#about-me-editor", "admin-about-me"); });
 
 
-const editor1 = new RichTextEditor("#about-me-editor", {editorResizeMode: "none"});
-
-function saveAsString(editorSelector) {
-
-    //TODO put/post
-    const button_save = document.createElement("button");
-    button_save.textContent = "Save HTML";
-    button_save.addEventListener("click", function () {
-        const editor = document.querySelector(editorSelector + ' iframe.rte-editable');
-
-
-        // Get the inner content from the RichTextEditor's editable div
-        const innerContent = editor.contentDocument.body.innerHTML;
-        console.log(innerContent)
-    });
-    document.body.appendChild(button_save);
-}
-
-saveAsString("#about-me-editor");
