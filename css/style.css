@@ -589,7 +589,7 @@ p {
 
 .services-column div, .practices-column div {
     flex: 48%;
-    height: 300px;
+    height: 350px;
     padding: 20px 20px;
 }
 
@@ -613,12 +613,6 @@ p {
     margin-top: 20px;
 }
 
-.services img, .practices img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 .services-column:hover, .practices-column:hover {
     box-shadow: 0 48px 100px 0 rgba(17, 12, 46, 0.18);
 }
@@ -628,7 +622,8 @@ p {
     width: 48px;
     height: 48px;
     font-size: x-large;
-    font-weight: bolder ;
+    font-weight: bolder;
+    margin-right: 30px;
 }
 
 .admin-editor {
@@ -645,10 +640,40 @@ p {
     min-height: 150px;
     width: fit-content;
     resize: none;
+    margin-bottom: 10px;
 }
 
 .delete, .submit {
     margin: 10px
+}
+
+.img-div, .admin-img-div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.admin-img-div {
+    flex-direction: column;
+}
+
+.img-div img{
+    width: auto;
+    height: 100%;
+    display: block;
+}
+
+.admin-img-div img {
+    width: auto;
+    height: 90%;
+    display: block;
+}
+
+.link {
+    width: 60%;
 }
 
 @media (max-width: 700px) {
@@ -658,7 +683,7 @@ p {
         margin: 0;
     }
 
-    .services img {
+    .services-column .img-div img {
        display: none;
     }
 
@@ -685,7 +710,7 @@ p {
 #price-editor, #about-me-editor {
     align-self: center;
     min-width: 600px;
-    width: 1000px;
+    width: 100%;
     max-width: 100%;
     min-height: 500px;
     height: auto;

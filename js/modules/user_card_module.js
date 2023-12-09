@@ -1,4 +1,4 @@
-import {fetchAnyData} from "./module.js";
+import {fetchAnyData, setupImage} from "./module.js";
 
 async function createCards(Url, dataType) {
     const dataObjectList = await fetchAnyData(Url);
@@ -12,52 +12,37 @@ async function createCards(Url, dataType) {
         console.log("id: " +element.id)
         if (element.priority % 2 === 1) {
             //Create Info
-            const dataInfo = document.createElement('div');
-            dataInfo.innerText = element.text;
-            /*const seeMoreBtn = document.createElement('button');
-            seeMoreBtn.classList.add("banner-btn blue-btn");
-            seeMoreBtn.setAttribute('href', '#');
-            seeMoreBtn.textContent("Læs Mere");
-            dataInfo.appendChild(seeMoreBtn);*/
-
-            //Create img and append it
-            const imageDiv = document.createElement('div')
-            const dataImage = document.createElement('img');
-            dataImage.setAttribute('src', element.image);
-            dataImage.setAttribute('alt', 'Intet billede');
-            dataImage.onerror = function() {
-                this.onerror = null; // Avoid potential infinite loops
-                this.src = '../../img/noImage.png'; // Set backup image source
-            };
-            imageDiv.appendChild(dataImage);
-            dataContainer.appendChild(dataInfo);
-            dataContainer.appendChild(imageDiv);
+           createCardInfo(dataContainer, element);
+           createCardImg(dataContainer, element);
         } else {
             //Create img and append it
-            const imageDiv = document.createElement('div')
-            const dataImage = document.createElement('img');
-            dataImage.setAttribute('src', element.image);
-            dataImage.setAttribute('alt', 'Intet billede');
-            dataImage.onerror = function() {
-                this.onerror = null; // Avoid potential infinite loops
-                this.src = '../../img/noImage.png'; // Set backup image source
-            };
-            dataContainer.appendChild(dataImage);
-
-
-            //Create Info
-            const dataInfo = document.createElement('div');
-            dataInfo.innerText = element.text;
-            /*const seeMoreBtn = document.createElement('button');
-            seeMoreBtn.classList.add("banner-btn blue-btn");
-            seeMoreBtn.setAttribute('href', '#');
-            seeMoreBtn.textContent("Læs Mere");
-            dataInfo.appendChild(seeMoreBtn);*/
-            imageDiv.appendChild(dataImage);
-            dataContainer.appendChild(imageDiv);
-            dataContainer.appendChild(dataInfo);
+            createCardImg(dataContainer, element);
+            createCardInfo(dataContainer, element);
         }
         dataCards.appendChild(dataContainer);
     })
 }
+
+function createCardInfo(container, element) {
+    const dataInfo = document.createElement('div');
+    dataInfo.innerText = element.text;
+    /*const seeMoreBtn = document.createElement('button');
+    seeMoreBtn.classList.add("banner-btn blue-btn");
+    seeMoreBtn.setAttribute('href', '#');
+    seeMoreBtn.textContent("Læs Mere");
+    dataInfo.appendChild(seeMoreBtn);*/
+    container.appendChild(dataInfo);
+}
+
+function createCardImg(container, element) {
+    //Create img and append it
+    const imageDiv = document.createElement('div')
+    imageDiv.classList.add("img-div");
+    const dataImage = document.createElement('img');
+    setupImage(dataImage, element);
+    imageDiv.appendChild(dataImage);
+    container.appendChild(imageDiv);
+}
+
+
 export {createCards}
