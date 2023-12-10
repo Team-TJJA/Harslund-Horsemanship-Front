@@ -11,6 +11,7 @@ async function postOrPutObjectAsJson(url, object, HttpVerb) {
         headers: {'Content-type' : 'application/json'},
         body: objectToJsonString
     }
+    console.log(url)
     const response = await fetch(url, fetchOption);
     return response;
 }
@@ -40,7 +41,6 @@ async function setupPage(dataName, Url) {
 function saveAsString(editorSelector) {
     const editor = "#"+editorSelector;
     const editorWindow = document.querySelector(editor + ' iframe.rte-editable');
-    console.log(editorWindow);
     // Get the inner content from the RichTextEditor's editable div
     const innerContent = editorWindow.contentDocument.body.innerHTML;
     return innerContent;
@@ -57,16 +57,17 @@ function createFormEventListener(dataName, elementID, url, id) {
     const form = document.getElementById(elementID);
     console.log(dataName, elementID, url, id)
     form.addEventListener('submit', (event) => {
-        handleSubmitForm(event, dataName, elementID, url, id, null, null);
+        handleSubmitForm(event, dataName, elementID, url, id, null, null, 'PUT');
     });
 }
 
-async function handleSubmitForm(event, dataName, elementID, url, id, image, priority) {
+async function handleSubmitForm(event, dataName, elementID, url, id, image, priority, httpVerb) {
     event.preventDefault();
     const text = saveAsString(elementID);
     const form = createObject(text, id, dataName, image, priority);
+    console.log(form);
     let response;
-    response = await postOrPutObjectAsJson(url, form, 'PUT');
+    response = await postOrPutObjectAsJson(url, form, httpVerb);
     if(response.ok) {
         alert(dataName + ' updated');
     }

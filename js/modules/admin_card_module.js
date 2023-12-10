@@ -28,7 +28,7 @@ async function createAdminCards(url, dataType) {
         dataCards.appendChild(dataContainer);
         const editor = dataType+"-editor"+element.priority
         initiateEditor(editor, element.text);
-        initializeEvent(dataContainer, element, dataType, editor, url)
+        initializeEvent(dataContainer, element, dataType, editor, url, 'PUT')
     });
     const addButton = document.createElement('button');
     addButton.textContent = '+';
@@ -176,16 +176,16 @@ function addCard(container, dataType, button, url) {
     const editor = dataType+"-editor"+size;
     container.appendChild(cardContainer);
     initiateEditor(editor, "");
-    initializeEvent(container, null, dataType, editor, url)
+    initializeEvent(container, {priority: size}, dataType, editor, url, cardContainer, 'POST')
     container.appendChild(button);
 }
 
-function initializeEvent(dataContainer, element, dataType, editor, url) {
+function initializeEvent(dataContainer, element, dataType, editor, url, container, httpVerb) {
     const savedPriority = element.priority;
     dataContainer.addEventListener('submit', (event) => {
         event.preventDefault();
         updatePriorities(element.priority, savedPriority, "update");
-        handleSubmitForm(event, dataType, editor, url, element.id, getImage(dataContainer), getPriority(dataContainer));
+        handleSubmitForm(event, dataType, editor, url, element.id, getImage(container), getPriority(container), httpVerb);
     });
 }
 
