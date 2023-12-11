@@ -11,7 +11,6 @@ async function postOrPutObjectAsJson(url, object, HttpVerb) {
         headers: {'Content-type' : 'application/json'},
         body: objectToJsonString
     }
-    console.log(url)
     const response = await fetch(url, fetchOption);
     return response;
 }
@@ -55,20 +54,18 @@ async function setAdminData(dataName, Url, editorSelector, elementID) {
 
 function createFormEventListener(dataName, elementID, url, id) {
     const form = document.getElementById(elementID);
-    console.log(dataName, elementID, url, id)
     form.addEventListener('submit', (event) => {
-        handleSubmitForm(event, dataName, elementID, url, id, null, null, 'PUT');
+        handleSubmitForm(event, dataName, elementID, url, id, null, null, 'PUT', true);
     });
 }
 
-async function handleSubmitForm(event, dataName, elementID, url, id, image, priority, httpVerb) {
+async function handleSubmitForm(event, dataName, elementID, url, id, image, priority, httpVerb, doAlert) {
     event.preventDefault();
     const text = saveAsString(elementID);
     const form = createObject(text, id, dataName, image, priority);
-    console.log(form);
     let response;
     response = await postOrPutObjectAsJson(url, form, httpVerb);
-    if(response.ok) {
+    if(response.ok && doAlert === true) {
         alert(dataName + ' updated');
     }
 }

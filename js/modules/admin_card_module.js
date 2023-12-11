@@ -6,6 +6,7 @@ async function createAdminCards(url, dataType) {
     while (dataCards.firstChild) {
         dataCards.removeChild(dataCards.firstChild);
     }
+    dataObjectList.sort((a, b) => a.priority - b.priority);
     dataObjectList.forEach(element => {
         const dataContainer = createCard(element, dataType);
         if (element.priority % 2 === 1) {
@@ -28,7 +29,7 @@ async function createAdminCards(url, dataType) {
         dataCards.appendChild(dataContainer);
         const editor = dataType+"-editor"+element.priority
         initiateEditor(editor, element.text);
-        initializeEvent(dataContainer, element, dataType, editor, url, 'PUT')
+        initializeEvent(dataContainer, element, dataType, editor, url, dataContainer, 'PUT')
     });
     const addButton = document.createElement('button');
     addButton.textContent = '+';
@@ -135,17 +136,25 @@ function getPriority(form) {
     return priority.value;
 }
 
-function updatePriorities(updatedPriority, oldPriority, reasonToUpdate) {
+function updatePriorities(updatedPriority, oldPriority, reasonToUpdate, id) {
     const forms = Array.from(document.getElementsByClassName('admin-editor'));
     if (oldPriority !== updatedPriority) {
         forms.forEach(form => {
-            const priority = form.querySelector(".priority");
-            if (reasonToUpdate === "delete" && priority.value > updatedPriority) {
-                form.querySelector(".priority").value = priority.value-1;
-            } else if (reasonToUpdate !== "delete" && priority.value > updatedPriority) {
-                form.querySelector(".priority").value = priority.value - 1;
+            const formID = form.querySelector(".id").value;
+            if (id !== formID) {
+                const priority = form.querySelector(".priority");
+                if (reasonToUpdate === "delete" && priority.value > updatedPriority) {
+                    form.querySelector(".priority").value = priority.value - 1;
+                }
+                if (reasonToUpdate !== "delete") {
+                    if (priority.value > oldPriority && priority.value <= updatedPriority) {
+                        form.querySelector(".priority").value = priority.value - 1;
+                    } else if (priority.value < oldPriority && priority.value >= updatedPriority) {
+                        form.querySelector(".priority").value = priority.value + 1;
+                    }
+                }
             }
-            form.dispatchEvent(new Event('submit'));
+            form.dispatchEvent(new Event('update'));
         });
     }
 }
@@ -155,6 +164,11 @@ function createCard(element, dataType) {
     dataContainer.classList.add(dataType+"s-column");
     dataContainer.classList.add("admin-editor");
     dataContainer.setAttribute("id", "admin-editor"+element.priority);
+    const id = document.createElement('input');
+    id.classList.add("id");
+    id.setAttribute("type", "hidden");
+    id.value = element.id;
+    dataContainer.appendChild(id);
     return dataContainer;
 }
 
@@ -176,7 +190,7 @@ function addCard(container, dataType, button, url) {
     const editor = dataType+"-editor"+size;
     container.appendChild(cardContainer);
     initiateEditor(editor, "");
-    initializeEvent(container, {priority: size}, dataType, editor, url, cardContainer, 'POST')
+    initializeEvent(container, {priority: size}, dataType, editor, url, cardContainer, 'POST');
     container.appendChild(button);
 }
 
@@ -184,8 +198,13 @@ function initializeEvent(dataContainer, element, dataType, editor, url, containe
     const savedPriority = element.priority;
     dataContainer.addEventListener('submit', (event) => {
         event.preventDefault();
-        updatePriorities(element.priority, savedPriority, "update");
-        handleSubmitForm(event, dataType, editor, url, element.id, getImage(container), getPriority(container), httpVerb);
+        const updatedPriority = container.querySelector('.priority').value;
+        updatePriorities(updatedPriority, savedPriority, "update", String(element.id));
+        handleSubmitForm(event, dataType, editor, url, element.id, getImage(container), getPriority(container), httpVerb, true);
+    });
+    dataContainer.addEventListener('update', (event) => {
+        event.preventDefault();
+        handleSubmitForm(event, dataType, editor, url, element.id, getImage(container), getPriority(container), httpVerb, false);
     });
 }
 
