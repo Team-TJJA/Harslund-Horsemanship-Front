@@ -15,9 +15,10 @@ async function postOrPutObjectAsJson(url, object, HttpVerb) {
     return response;
 }
 
-async function restDelete(url) {
+async function restDelete(object, url) {
     const fetchOption = {
         method: "DELETE",
+        body: JSON.stringify(object),
         headers: {'Content-type' : 'application/json'},
     }
     const response = await fetch(url,fetchOption);
@@ -26,7 +27,7 @@ async function restDelete(url) {
 
 async function setupPage(dataName, Url) {
     const data = await fetchAnyData(Url);
-    const dataContainer = document.querySelector('.row');
+    const dataContainer = document.getElementById(dataName+'-row');
     while (dataContainer.firstChild) {
         dataContainer.removeChild(dataContainer.firstChild);
     }
@@ -37,34 +38,57 @@ async function setupPage(dataName, Url) {
 }
 
 function saveAsString(editorSelector) {
-    const editor = document.querySelector(editorSelector + ' iframe.rte-editable');
+    const editor = "#"+editorSelector;
+    const editorWindow = document.querySelector(editor + ' iframe.rte-editable');
     // Get the inner content from the RichTextEditor's editable div
-    const innerContent = editor.contentDocument.body.innerHTML;
+    const innerContent = editorWindow.contentDocument.body.innerHTML;
     return innerContent;
 }
 
 async function setAdminData(dataName, Url, editorSelector, elementID) {
     const data = await fetchAnyData(Url);
     const editor = document.querySelector(editorSelector + ' iframe.rte-editable');
-    editor.contentDocument.body.innerHTML = data[0].text
-    createFormEventListener(dataName, elementID, Url);
+    editor.contentDocument.body.innerHTML = data[0].text;
+    createFormEventListener(dataName, elementID, Url, data[0].id);
 }
 
-function createFormEventListener(dataName, elementID, url) {
+function createFormEventListener(dataName, elementID, url, id) {
     const form = document.getElementById(elementID);
     form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        handleSubmitForm(dataName, elementID, url);
+        handleSubmitForm(event, dataName, elementID, url, id, null, null, 'PUT', true);
     });
 }
 
-async function handleSubmitForm(dataName, elementID, url) {
-    const form = {id: 1, text: saveAsString("#"+elementID)}
+async function handleSubmitForm(event, dataName, elementID, url, id, image, priority, httpVerb, doAlert) {
+    event.preventDefault();
+    const text = saveAsString(elementID);
+    const form = createObject(text, id, dataName, image, priority);
     let response;
-    response = await postOrPutObjectAsJson(url, form, 'PUT');
-    if(response.ok) {
+    response = await postOrPutObjectAsJson(url, form, httpVerb);
+    if(response.ok && doAlert === true) {
         alert(dataName + ' updated');
     }
 }
 
-export {postOrPutObjectAsJson, restDelete, setupPage, saveAsString, setAdminData, fetchAnyData, createFormEventListener}
+function setupImage(dataImage, element) {
+    if (element !== null) {
+        dataImage.setAttribute('src', element.image);
+    } else {
+        dataImage.setAttribute('src', '../../img/noImage.png');
+    }
+    dataImage.setAttribute('alt', 'Intet billede');
+    dataImage.onerror = function () {
+        this.onerror = null; // Avoid potential infinite loops
+        this.src = '../../img/noImage.png'; // Set backup image source
+    };
+}
+
+function createObject(text, id, dataName, image, priority) {
+    if (priority === null) {
+        return {id: id, text: text};
+    } else {
+        return {id: id, text: text, image: image, priority: priority};
+    }
+}
+
+export {postOrPutObjectAsJson, restDelete, setupPage, saveAsString, setAdminData, fetchAnyData, handleSubmitForm, createFormEventListener, setupImage}
