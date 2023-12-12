@@ -1,21 +1,7 @@
-import {} from "../module.js";
+import {setAdminData} from "../modules/module.js";
 
-const editor1 = new RichTextEditor("#price-editor", {editorResizeMode: "none"});
-
-function saveAsString(editorSelector) {
-
-    //TODO put/post
-    const button_save = document.createElement("button");
-    button_save.textContent = "Save HTML";
-    button_save.addEventListener("click", function () {
-        const editor = document.querySelector(editorSelector + ' iframe.rte-editable');
-
-
-        // Get the inner content from the RichTextEditor's editable div
-        const innerContent = editor.contentDocument.body.innerHTML;
-        console.log(innerContent)
-    });
-    document.body.appendChild(button_save);
-}
-
-saveAsString("#price-editor");
+//const priceUrl = "https://harslundhorsemanship.azurewebsites.net/priser";
+//const priceUrl = "https://harslundbackend.azurewebsites.net/priser";
+const priceUrl = "http://localhost:8080/priser";
+new RichTextEditor("#price-editor", {editorResizeMode: "none"});
+document.addEventListener('DOMContentLoaded',() => { setAdminData('price', priceUrl, "#price-editor", "admin-price"); });

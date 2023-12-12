@@ -11,7 +11,6 @@ html {
     scroll-behavior: smooth;
 }
 
-/*#fcfafa;*
 
 /*------Header section------*/
 
@@ -117,7 +116,7 @@ nav .fa {
     display: none;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 850px) {
 
     .text-box h1 {
         font-size: 20px;
@@ -195,7 +194,6 @@ p {
 }
 
 .row .course-column:hover {
-    /*box-shadow: 0 0 20px 0px rgba(0,0,0,0.15);*/
     box-shadow: 0 48px 100px 0 rgba(17, 12, 46, 0.18);
 }
 
@@ -205,7 +203,7 @@ p {
     margin-top: 10px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 850px) {
     .row {
         flex-direction: column;
     }
@@ -233,9 +231,11 @@ p {
     height: 400px;
 }
 
-.service-column img {
+.service-column  img{
     width: 100%;
+    max-width: 300px;
     height: 100%;
+    padding-bottom: 100%;
     object-fit: cover;
 }
 
@@ -271,7 +271,7 @@ p {
     opacity: 1;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 850px) {
     .service-column img {
         width: 100%;
         height: 300px;
@@ -363,7 +363,7 @@ p {
     padding: 0 50px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 850px) {
     .cta h1 {
         font-size: 24px;
     }
@@ -394,7 +394,7 @@ p {
 
 /*------ about me page ------*/
 
-.sub-header-about {
+.sub-header-about, .sub-header-price {
     height: 50vh;
     width: 100%;
     background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url(../img/aboutmebanner.jpg);
@@ -408,51 +408,7 @@ p {
     margin-top: 80px;
 }
 
-.about-me {
-    width: 80%;
-    margin: auto;
-    padding-top: 80px;
-    padding-bottom: 80px;
-}
-
-.about-column {
-    flex-basis: 48%;
-    padding: 30px 2px;
-}
-
-.about-column img {
-    width: 100%;
-}
-
-.about-column h1 {
-    padding-top: 0;
-}
-
-.about-column p {
-    padding: 15px 0 10px;
-    letter-spacing: 1px;
-}
-
-.about-column ul li {
-    margin-left: 20px;
-    color: #777777;
-    letter-spacing: 1px;
-    line-height: 1.8;
-}
-
-#admin-about-me {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    margin: 10px;
-}
-
-#about-me-editor {
-    width: 1100px;
-    height: 500px;
-}
-
-@media (max-width: 700px) {
+@media (max-width: 850px) {
     .sub-header-about h1 {
         font-size: 25px;
     }
@@ -578,7 +534,7 @@ p {
 }
 
 
-@media (max-width: 700px) {
+@media (max-width: 850px) {
     .sub-header-contact h1 {
         font-size: 25px;
     }
@@ -631,7 +587,7 @@ p {
 
 .services-column div, .practices-column div {
     flex: 48%;
-    height: 300px;
+    height: 350px;
     padding: 20px 20px;
 }
 
@@ -655,12 +611,6 @@ p {
     margin-top: 20px;
 }
 
-.services img, .practices img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 .services-column:hover, .practices-column:hover {
     box-shadow: 0 48px 100px 0 rgba(17, 12, 46, 0.18);
 }
@@ -670,7 +620,8 @@ p {
     width: 48px;
     height: 48px;
     font-size: x-large;
-    font-weight: bolder ;
+    font-weight: bolder;
+    margin-right: 30px;
 }
 
 .admin-editor {
@@ -687,20 +638,51 @@ p {
     min-height: 150px;
     width: fit-content;
     resize: none;
+    margin-bottom: 10px;
 }
 
 .delete, .submit {
     margin: 10px
 }
 
-@media (max-width: 700px) {
+.img-div, .admin-img-div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.admin-img-div {
+    flex-direction: column;
+}
+
+.img-div img{
+    width: auto;
+    height: 100%;
+    display: block;
+}
+
+.admin-img-div img {
+    width: auto;
+    height: 90%;
+    display: block;
+}
+
+.link {
+    width: 60%;
+}
+
+@media (max-width: 850px) {
+
 
     .services-column {
         flex-direction: column;
         margin: 0;
     }
 
-    .services img {
+    .services-column .img-div img {
        display: none;
     }
 
@@ -712,32 +694,34 @@ p {
 
 /*------ prices page ------*/
 
-
-.prices {
+.prices, .about-me {
     width: 80%;
     margin: auto;
     padding: 20px 0;
+    align-content: center;
 }
 
-.prices-column {
+.prices-column, .about-column {
+    text-align-all: center;
+    margin: auto;
+}
+
+#price-editor, #about-me-editor {
+    align-self: center;
+    min-width: 600px;
+    width: 100%;
+    max-width: 100%;
+    min-height: 500px;
+    height: auto;
+}
+
+#price-row {
     text-align: center;
     margin: auto;
 }
 
-.price-line hr {
-    border: solid 1px #cccccc;
-    display: block;
-    margin: 17px 0 17px 0;
-}
-
-.prices-blocks {
-
-}
-
-#price-editor {
-    align-self: center;
-    min-width: 600px;
-    width: 1200px;
-    min-height: 500px;
-    max-height: 1000px;
+#about-row {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
 }
